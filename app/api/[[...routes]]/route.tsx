@@ -29,7 +29,7 @@ app.frame('/shop/:id', (c) => {
         'Content-Type': 'image/jpeg'
       },
       intents: [
-        <Button key='pay' value='P'>Start Shopping</Button>,
+        <Button key='pstart' value='P'>Start Shopping</Button>,
       ]
     })
   })
@@ -37,7 +37,7 @@ app.frame('/shop', (c) => {
     return c.res({
      image: '/ShopifyBased.jpeg',
       intents: [
-        <Button.Link key='pay' href='https://www.shopify.com/'>Check</Button.Link>,
+        <Button.Link key='py' href='https://www.shopify.com/'>Check</Button.Link>,
       ]
     })
   })
@@ -124,7 +124,7 @@ console.log('false i ,', i);
         'Content-Type': 'image/jpeg'
       },
       intents: [
-        <Button key='pay' value='P'>Something wrong</Button>,
+        <Button key='payed' value='P'>Something wrong</Button>,
       ]
     })
   }
@@ -324,7 +324,7 @@ if(firstProducts.image_src==null){
       'Content-Type': 'image/jpeg'
     },
     intents: [
-      <Button key='pay' value='P'>No img Found(Next)</Button>,
+      <Button key='No' value='P'>No img Found(Next)</Button>,
       <Button.Link key='pay' href='https://admin.shopify.com/store'>Kindly Add IMG</Button.Link>,
     ]
   })
