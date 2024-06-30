@@ -1,22 +1,4 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {}
 
-module.exports = {
-  
-    webpack(config) {
-      config.resolve.fallback = {
-  
-        // if you miss it, all the other options in fallback, specified
-        // by next.js will be dropped.
-        ...config.resolve.fallback,  
-  
-        fs: false, // the solution
-        eslint: {
-          ignoreDuringBuilds: true,
-      },
-      };
-
-      return config;
-    },
-  };
-// module.exports = nextConfig
+module.exports = nextConfig
