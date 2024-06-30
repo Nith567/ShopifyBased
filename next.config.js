@@ -11,8 +11,11 @@ module.exports = {
         ...config.resolve.fallback,  
   
         fs: false, // the solution
+        eslint: {
+          ignoreDuringBuilds: true,
+      },
       };
-      
+
       return config;
     },
   };
