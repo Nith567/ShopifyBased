@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-hero-gradient {
+  background-image: conic-gradient(
+    from var(--hero-gradient-angle) at var(--hero-gradient-stop-point) 50%,
+
+    var(--blue) 0deg,
+    var(--green) 178.12deg,
+    white 360deg,
+    rgba(255, 255, 255, 0) 360deg
+  );
+}
+
+.custom-cta {
+  background-color: var(--blue);
+  background-image: linear-gradient(
+    -10deg,
+    var(--blue),
+    var(--blue),
+    var(--blue),
+    var(--green)
+  );
+}
+
+.custom-modal-bg {
+  background-image: linear-gradient(90deg, #aec7ff, #eeffcd);
+}
+
+.custom-features-bg {
+  background-image: linear-gradient(-10deg, #b0d370, #0052ff);
+}
+
+.custom-cta {
+  background-image: linear-gradient(90deg, #bbd290, #266bff);
+}
+
+:root {
+  --hero-gradient-angle: 90.01deg;
+  --hero-gradient-stop-point: 20%;
+  --green: #87b237;
+  --blue: #0052ff;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #909;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #909;
+  opacity: 1;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #909;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #909;
+}
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #909;
+}
+
+::placeholder {
+  /* Most modern browsers support this now. */
+  color: #909;
+}
