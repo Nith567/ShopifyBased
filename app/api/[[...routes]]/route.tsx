@@ -626,17 +626,7 @@ catch (error) {
     ]
   })
 })
-// app.frame('/finish2',async (c) => {
-//   return c.res({
-//     image: `/ShopifyBasedLogo.png`,
-//     headers:{
-//       'Content-Type': 'image/jpeg'
-//     },
-//     intents: [
-//       <Button key='pay' value='P'>Sucessfully purchased</Button>,
-//     ]
-//   })
-// })
+
 devtools(app, { serveStatic })
 
 export const GET = handle(app)
