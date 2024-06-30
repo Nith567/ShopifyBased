@@ -7,24 +7,28 @@ GiftTopIcon,
 
 const features = [
   {
+    id:1,
     name: "Customer can order your products right within Frames",
     description:
       "All you need to do is fill up necessary details with your reward walletAddress, get a frame link.",
     icon:  ShoppingCartIcon,
   },
   {
+    id:2,
     name: "Automating Onchain Shopify Rewards",
     description:
       "Customers receive NFT rewards totally onchain for their orders.",
     icon: ShoppingBagIcon,
   },
   {
+    id:3,
     name: "Earn more onchain rewards as you buy more orders",
     description:
       "More orders will make you to earn NFT rewards, this can help to give discounts through coupons system",
     icon: GifIcon,
   },
   {
+    id:4,
     name: "Bring loyality Program onchain and appreaciate your customers with NFT rewards",
     description:
       "Customers can earn NFT rewards for their orders and can redeem them for discounts on future orders.",
@@ -45,7 +49,7 @@ export default function Feature() {
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
             {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
+              <div key={feature.id} className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-gray-900">
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-[#01A4F1]">
                     <feature.icon
