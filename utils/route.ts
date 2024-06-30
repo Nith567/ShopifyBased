@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const fetchKeyDetails = async (id:string) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/ship/${id}`);
+      const response = await axios.get(`${process.env.NEXT_API_URL}/api/ship/${id}`);
       
       // Assuming the key details are stored in response.data
       const { shopifyToken,publicUrl,walletAddress } = response.data;
@@ -18,7 +18,7 @@ export const fetchKeyDetails = async (id:string) => {
 
   export const fetchProductsShopify = async (shopifyToken:string,publicUrl:string) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/products`,{data:{shopifyToken,publicUrl}});
+      const response = await axios.get(`${process.env.NEXT_API_URL}/api/products`,{data:{shopifyToken,publicUrl}});
       
       // Assuming the key details are stored in response.data
     

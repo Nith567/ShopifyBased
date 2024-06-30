@@ -56,7 +56,7 @@ shopifyToken: string,
 publicUrl: string,
   ) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/ship', {
+      const response = await axios.post(`${process.env.NEXT_API_URL}/api/ship`, {
      shopifyToken,
      publicUrl,
 address
