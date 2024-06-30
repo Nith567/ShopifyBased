@@ -514,7 +514,7 @@ app.frame('/confirmit/:id/:vId',async (c) => {
   const vId=c.req.param("vId")
     const { transactionId} = c
     return c.res({
-      action:`/confirm/:${id}/${vId}`,
+      action:`/confirm/${id}/${vId}`,
       image:(
   <div
   style={{
@@ -531,8 +531,9 @@ app.frame('/confirmit/:id/:vId',async (c) => {
   }}
   >
   {transactionId
-    ? `tnx : ${transactionId.slice(0, 3)}...${transactionId.slice(-3)} 
-    Enter details in this format- emailAddress:first_name:last_name:address:province:state:phone:city:country:zip:quantity`
+    ? `tnxs : ${transactionId.slice(0, 3)}...${transactionId.slice(-3)} 
+    Enter details in this format- 
+    email:first_name:last_name:address:province:state:phone:city:country:zip:quantity`
   
     : 'transaction ...'}
   </div>
