@@ -19,3 +19,6 @@ We have set up a Smart Wallet, allowing you to integrate a frame link from your 
 1. **Bring loyality Program onchain and appreaciate your customers with NFT rewards**: Customers can earn NFT rewards for their orders and can redeem them for discounts on future orders.
 2. **ShopifyFrame + Smart Wallet Integration**: Set up wallet through passkeys or FaceId, your orders(Shopify Dashboard items) get paid onchain directly to your wallet, right within frames
 3. **Disclaimer**: You can view each product with its metadata also variants of each product(if exists any).Its very important to have Image src for each and very product, otherwise it wont render, also try to add in Shopify Admin
+
+<img width="611" alt="Screenshot 2024-07-01 at 5 00 10 PM" src="https://github.com/Nith567/ShopifyBased/assets/91722732/0614cf5c-42b2-4a33-b4ab-93fc3a8637ce">
+
