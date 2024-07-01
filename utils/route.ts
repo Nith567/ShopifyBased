@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const fetchKeyDetails = async (id:string) => {
     try {
-      const response = await axios.get(`${process.env.NEXT_API_URL}/api/ship/${id}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/ship/${id}`);
       
       // Assuming the key details are stored in response.data
       const { shopifyToken,publicUrl,walletAddress } = response.data;
