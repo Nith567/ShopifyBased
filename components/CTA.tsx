@@ -4,7 +4,7 @@ import { ClipboardIcon } from "@heroicons/react/24/outline";
 export default function CTA({ id }: { id: any }) {
   const copyToClipboard = async () => {
     try {
-      const url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/next/${id}`;
+      const url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/shop/${id}`;
       await navigator.clipboard.writeText(url);
       alert("Copy and Paste in Frames!");
     } catch (error) {

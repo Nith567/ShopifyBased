@@ -55,6 +55,7 @@ export default function Hero() {
 shopifyToken: string,
 publicUrl: string,
   ) => {
+    console.log(`${process.env.NEXT_PUBLIC_API_URL}`)
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/ship`, {
      shopifyToken,

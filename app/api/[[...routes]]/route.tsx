@@ -46,6 +46,7 @@ app.frame('/next/:id', async(c) => {
   try{
    const id = c.req.param('id');
   const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id);
+  console.log('pk ',shopifyToken,publicUrl,walletAddress)
   console.log('loser1',i);
 const products =await fetchProductsShopify(shopifyToken,publicUrl)
 const firstProduct=products[i];
@@ -481,7 +482,7 @@ catch(error){
       'Content-Type': 'image/jpeg'
     },
     intents: [
-      <Button key='pay' value='P'>Something wrong</Button>,
+      <Button key='pay' value='P'>Something went wrong</Button>,
     ]
   })
 }
