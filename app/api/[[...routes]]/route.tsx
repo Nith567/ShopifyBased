@@ -325,7 +325,7 @@ if(firstProducts.image_src==null){
       'Content-Type': 'image/jpeg'
     },
     intents: [
-      <Button key='No' value='P'>No img Found(Next)</Button>,
+      <Button key='No' value='P'>No product/img Found(Next)</Button>,
       <Button.Link key='pay' href='https://admin.shopify.com/store'>Kindly Add IMG</Button.Link>,
     ]
   })
@@ -548,6 +548,8 @@ app.frame('/confirmit/:id/:vId',async (c) => {
   })
 
 app.frame('/confirm/:id/:vId',async (c) => {
+
+  try{
   const id=c.req.param("id")
   const vId=c.req.param("vId")
       const { inputText = '',previousButtonValues } = c
@@ -598,7 +600,7 @@ const data = {
     "financial_status": "paid",
     "line_items": [
       {
-        "variant_id": vId,
+      "product_id": vId,
         "quantity": quantity
       }
     ]
@@ -626,6 +628,20 @@ catch (error) {
       <Button key='pay' value='P'>Sucessfully purchased</Button>,
     ]
   })
+}
+catch(error){
+  return c.res({
+    action: `/shop`,
+    image: '/ShopifyBased.jpeg',
+    imageAspectRatio:"1.91:1",
+    headers:{
+      'Content-Type': 'image/jpeg'
+    },
+    intents: [
+      <Button key='pay' value='P'>Something went wrong</Button>,
+    ]
+  })
+}
 })
 
 devtools(app, { serveStatic })
