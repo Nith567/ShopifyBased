@@ -544,8 +544,10 @@ app.frame('/confirm/:id/:title/:price',async (c) => {
 
   try{
   const id=c.req.param("id")
-  const title=c.req.param("vId")
+  const title=c.req.param("title")
   const price=c.req.param("price")
+  const decodedTitle=decodeURIComponent(title)
+
       const { inputText = '',previousButtonValues } = c
       const splitInput = inputText.split(':');
 
@@ -593,7 +595,7 @@ const data = {
     "financial_status": "paid",
     "line_items": [
       {
-        "title": title,
+        "title": decodedTitle,
         "price": price,
         "quantity": quantity
       }
