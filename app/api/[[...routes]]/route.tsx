@@ -122,7 +122,7 @@ console.log('false i ,', i);
         'Content-Type': 'image/jpeg'
       },
       intents: [
-        <Button key='payed' value='P'>Something wrong</Button>,
+        <Button key='payed' action='/' value='P'>Something wrong</Button>,
       ]
     })
   }
@@ -274,7 +274,7 @@ console.log('incrment',i)
         'Content-Type': 'image/jpeg'
       },
       intents: [
-        <Button key='pay' value='P'>Something wrong</Button>,
+        <Button key='pay' action='/' value='P'>Something wrong</Button>,
       ]
     })
   }
@@ -474,7 +474,7 @@ catch(error){
       'Content-Type': 'image/jpeg'
     },
     intents: [
-      <Button key='pay' value='P'>Something went wrong</Button>,
+      <Button key='pay' action='/' value='P'>Something went wrong</Button>,
     ]
   })
 }
@@ -554,9 +554,9 @@ app.frame('/confirm/:id/:title/:price',async (c) => {
       const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id);
       console.log(splitInput)
      const [
-      emailAddress,first_name,last_name,address,province,phone,city,state,country,zip,quantity
+      emailAddress,first_name,last_name,address,province,phone,city,state,country,zip
     ] = splitInput;
-console.log(emailAddress,first_name,last_name,address,province,phone,city,state,country,zip,quantity);
+console.log(emailAddress,first_name,last_name,address,province,phone,city,state,country,zip);
 
 const url = `${publicUrl}/admin/api/2024-04/orders.json`;
 // const url = 'https://quickstart-bc2bbab8.myshopify.com/admin/api/2024-04/orders.json';
@@ -597,7 +597,7 @@ const data = {
       {
         "title": decodedTitle,
         "price": price,
-        "quantity": quantity
+        "quantity":1
       }
     ]
   }
@@ -634,7 +634,7 @@ catch(error){
       'Content-Type': 'image/jpeg'
     },
     intents: [
-      <Button key='pay' value='P'>Something went wrong</Button>,
+      <Button key='pay' action='/' value='P'>Something went wrong</Button>,
     ]
   })
 }

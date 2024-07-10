@@ -10,6 +10,7 @@ import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
 import { useRouter } from "next/navigation";
 import { britney } from "@/app/fonts";
+import { IndexChat } from '@indexnetwork/ui';
 
 export default function Hero() {
   const router = useRouter();
@@ -75,66 +76,74 @@ address
     {showModal && (
       <StoreModal setShowModal={setShowModal} handleVerify={handleVerify} />
     )}
-    <div className="custom-hero-gradient min-h-screen scale-x-[-1]">
-      <div
-        className={
-          montserrat.className +
-          " text-black scale-x-[-1] flex text-4xl md:text-[60px] leading-[1.2] font-bold flex-col items-start pl-6 md:pl-28 justify-center"
-        }
-      >
-        <div className="h-[50vh] pb-2 w-full md:w-[700px] flex flex-col justify-end">
-          <span>
-            <span
-              className={`${sasita.className} text-transparent bg-clip-text bg-gradient-to-br from-slate-500 mt-2 to-[#01f141]`}
-            >
-              ShopifyBased
-            </span>
-            <br />
-            Customers can order your products right within{" "}
-            Frames
-          </span>
-        </div>
-        <div className="text-white pt-2">
-          <span>
-            Shopify <span className={britney.className}>OnChain</span>
-          </span>
-        </div>
-        <p className="pt-16 pb-8 text-white font-normal text-base w-full md:w-[700px]">
-          Get a frame link from the product page and share it with your customers to order your products right within Frames with Rewards{" "}
-          <span className={britney.className}>Onchain</span>
-        </p>
-        <div className="flex flex-row w-auto gap-4">
-  <button
-    onClick={() => setShowModal(true)}
-    className="px-5 py-3 bg-slate-300 hover:bg-indigo-600 rounded text-base font-semibold shadow-md  transition duration-300 ease-in-out"
-  >
-    Get Started
-  </button>
 
-  {address ? (
-    <div className="text-center text-xl">
-      <button
-        onClick={handleCopyAddress}
-        className="px-5 py-3 bg-blue-500  hover:bg-violet-800 text-white font-bold rounded-lg shadow-md flex items-center gap-2 transition duration-300 ease-in-out"
-      >
-        <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
-        <span className="text-[10px]">
-          {copied ? <Tick /> : <Copy />}
+<div className="custom-hero-gradient min-h-screen scale-x-[-1]">
+  <div
+    className={
+      montserrat.className +
+      " text-black scale-x-[-1] flex text-4xl md:text-[60px] leading-[1.2] font-bold flex-col items-start pl-6 md:pl-28 justify-center"
+    }
+  >
+    <div className="h-[50vh] pb-2 w-full md:w-[700px] flex flex-col justify-end">
+      <span>
+        <span
+          className={`${sasita.className} text-transparent bg-clip-text bg-gradient-to-br from-slate-500 mt-2 to-[#01f141]`}
+        >
+          ShopifyBased
         </span>
-      </button>
+        <br />
+        Customers can order your products right within{" "}
+        Frames
+      </span>
     </div>
-  ) : (
-    <button
-      onClick={() => connect({ connector })}
-      className="px-5 py-3 rounded-md bg-white text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition duration-300 ease-in-out"
-    >
-      Log In
-    </button>
-  )}
+    <div className="text-white pt-2">
+      <span>
+        Shopify <span className={britney.className}>OnChain</span>
+      </span>
+    </div>
+    <p className="pt-16 pb-8 text-white font-normal text-base w-full md:w-[700px]">
+      Get a frame link from the product page and share it with your customers to order your products right within Frames with Rewards{" "}
+      <span className={britney.className}>Onchain</span>
+    </p>
+    <div className="flex flex-row w-auto gap-4">
+      <button
+        onClick={() => setShowModal(true)}
+        className="px-5 py-3 bg-slate-300 hover:bg-indigo-600 rounded text-base font-semibold shadow-md transition duration-300 ease-in-out"
+      >
+        Get Started
+      </button>
+
+      {address ? (
+        <div className="text-center text-xl">
+          <button
+            onClick={handleCopyAddress}
+            className="px-5 py-3 bg-blue-500 hover:bg-violet-800 text-white font-bold rounded-lg shadow-md flex items-center gap-2 transition duration-300 ease-in-out"
+          >
+            <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
+            <span className="text-[10px]">
+              {copied ? <Tick /> : <Copy />}
+            </span>
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={() => connect({ connector })}
+          className="px-5 py-3 rounded-md bg-white text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition duration-300 ease-in-out"
+        >
+          Log In
+        </button>
+      )}
+    </div>
+
+    <div className="mt-8 text-blue-500">
+      Query your doubts here: 
+      <div className="mt-3">
+      <IndexChat sources={["did:pkh:eip155:1:0x1b9Aceb609a62bae0c0a9682A9268138Faff4F5f"]} />
+    </div>
+    </div>
+  </div>
 </div>
 
-      </div>
-    </div>
   </section>
   
   );
