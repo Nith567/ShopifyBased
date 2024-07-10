@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { useState, useEffect } from "react";
 import { Sansita_Swashed, Petrona } from "next/font/google";
 const sasita = Sansita_Swashed({ subsets: ["latin"] });
@@ -13,30 +13,41 @@ import { britney } from "@/app/fonts";
 import { IndexChat } from '@indexnetwork/ui';
 
 export default function Hero() {
+
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
   const { connectors, connect, status, error } = useConnect();
   const {address} = useAccount();
 	const connector = connectors[0];
+
   useEffect(() => {
     function handleHitEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
         setShowModal(false);
       }
     }
-    document.addEventListener("keydown", handleHitEscape);
-    return () => document.removeEventListener("keydown", handleHitEscape);
+
+    if (typeof document !== "undefined") {
+      document.addEventListener("keydown", handleHitEscape);
+    }
+
+    return () => {
+      if (typeof document !== "undefined") {
+        document.removeEventListener("keydown", handleHitEscape);
+      }
+    };
   }, []);
 
   useEffect(() => {
-    if (showModal) {
-      document.documentElement.style.overflowY = "hidden";
-    } else {
-      document.documentElement.style.overflowY = "auto";
+    if (typeof document !== "undefined") {
+      if (showModal) {
+        document.documentElement.style.overflowY = "hidden";
+      } else {
+        document.documentElement.style.overflowY = "auto";
+      }
     }
   }, [showModal]);
-
 
   function handleCopyAddress() {
     if (!address) return;
@@ -52,25 +63,23 @@ export default function Hero() {
   }
 
 
-  const handleVerify = async (
-shopifyToken: string,
-publicUrl: string,
-  ) => {
-    console.log(`${process.env.NEXT_PUBLIC_API_URL}`)
+  const handleVerify = async (shopifyToken: string, publicUrl: string) => {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/ship`, {
-     shopifyToken,
-     publicUrl,
-address
+        shopifyToken,
+        publicUrl,
+        address
       });
       const objectId = response.data._id;
-      console.log("response ", response.data._id);
       router.push(`/shop/${objectId}`);
     } catch (error) {
       console.error("Error verifying:", error);
     }
     setShowModal(false);
   };
+
+
+
   return (
     <section className="min-h-screen">
     {showModal && (

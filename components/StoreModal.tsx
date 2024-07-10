@@ -1,5 +1,4 @@
-"use client";
-
+'use client'
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { XCircleIcon } from "@heroicons/react/24/outline";
@@ -14,18 +13,16 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
   const [shopifyToken, setShopifyToken] = useState<string>("");
   const [publicUrl, setPublicUrl] = useState<string>("");
 
+  // Use useEffect for client-side operations
   useEffect(() => {
-    // This code runs on the client-side after the component mounts
-    // You can safely access document and perform DOM operations here
     const shopifyTokenInput = document.getElementById("shopifyToken") as HTMLInputElement;
     const publicUrlInput = document.getElementById("publicUrl") as HTMLInputElement;
 
-    // Ensure the inputs exist before setting their values
     if (shopifyTokenInput && publicUrlInput) {
       shopifyTokenInput.value = shopifyToken;
       publicUrlInput.value = publicUrl;
     }
-  }, []); // Empty dependency array ensures this runs only once after initial render
+  }, [shopifyToken, publicUrl]); // Depend on state changes that affect DOM updates
 
   return (
     <div
@@ -46,7 +43,7 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
 
         <input
           type="text"
-          id='shopifyToken'
+          id="shopifyToken"
           value={shopifyToken}
           onChange={(e) => setShopifyToken(e.target.value)}
           placeholder="Shopify Access Token"
@@ -55,7 +52,8 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
 
         <input
           type="text"
-          id='publicUrl'
+          id="publicUrl"
+          value={publicUrl}
           onChange={(e) => setPublicUrl(e.target.value)}
           placeholder="Enter your Shopify website"
           className="p-2 rounded w-full outline outline-1 bg-transparent focus:outline-2 outline-neutral-600"
@@ -85,8 +83,8 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
             className="bg-[--green] hover:bg-[#7eaa2b] text-white rounded px-6 py-2"
             onClick={() =>
               handleVerify(
-                (document.getElementById("shopifyToken") as HTMLInputElement)?.value || "",
-                (document.getElementById("publicUrl") as HTMLInputElement)?.value || ""
+                shopifyToken,
+                publicUrl
               )
             }
           >
