@@ -64,6 +64,7 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
           <ul className="list-disc px-5">
             <li>This app is for only ecomFrame,Kindly give Access Token enough scope permissions for orders </li>
             <li> Enter a key from the ShopifyDashboard</li>
+            Disclaimer: It takes really some time to get a link, kindly wait for 2-3 minutes
           </ul>
         </div>
 
