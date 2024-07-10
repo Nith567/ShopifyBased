@@ -4,17 +4,29 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+
 interface Props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  handleVerify: (
-    shopifyToken: string,
-    publicUrl: string,
-  ) => void;
+  handleVerify: (shopifyToken: string, publicUrl: string) => void;
 }
 
 const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
   const [shopifyToken, setShopifyToken] = useState<string>("");
   const [publicUrl, setPublicUrl] = useState<string>("");
+
+  useEffect(() => {
+    // This code runs on the client-side after the component mounts
+    // You can safely access document and perform DOM operations here
+    const shopifyTokenInput = document.getElementById("shopifyToken") as HTMLInputElement;
+    const publicUrlInput = document.getElementById("publicUrl") as HTMLInputElement;
+
+    // Ensure the inputs exist before setting their values
+    if (shopifyTokenInput && publicUrlInput) {
+      shopifyTokenInput.value = shopifyToken;
+      publicUrlInput.value = publicUrl;
+    }
+  }, []); // Empty dependency array ensures this runs only once after initial render
+
   return (
     <div
       onClick={() => setShowModal(false)}
@@ -39,46 +51,44 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
           onChange={(e) => setShopifyToken(e.target.value)}
           placeholder="Shopify Access Token"
           className="p-2 rounded w-full outline outline-1 bg-transparent focus:outline-2 outline-neutral-600"
-        ></input>
+        />
 
-          <input
-            type="text"
-            id='publicUrl'
-            onChange={(e) => setPublicUrl(e.target.value)}
-            placeholder="Enter your shopify website"
-            className="p-2 rounded w-full outline outline-1 bg-transparent  focus:outline-2 outline-neutral-600"
-          ></input>
+        <input
+          type="text"
+          id='publicUrl'
+          onChange={(e) => setPublicUrl(e.target.value)}
+          placeholder="Enter your Shopify website"
+          className="p-2 rounded w-full outline outline-1 bg-transparent focus:outline-2 outline-neutral-600"
+        />
 
-                  <span>
-            <Link
-              target="_blank"
-              href="https://medium.com/@nithinkatkam504106/automating-nft-rewards-for-shopify-orders-using-owl-protocol-and-zapier-ef2195518c54"
-              className="underline text-purple-950"
-            >
-              ZapierTutorial
-            </Link>
-          </span>
-          
+        <span>
+          <Link
+            target="_blank"
+            href="https://medium.com/@nithinkatkam504106/automating-nft-rewards-for-shopify-orders-using-owl-protocol-and-zapier-ef2195518c54"
+            className="underline text-purple-950"
+          >
+            ZapierTutorial
+          </Link>
+        </span>
+
         <div className="">
-          By clicking the button below,make sure you follow this conditions:
+          By clicking the button below, make sure you follow these conditions:
           <ul className="list-disc px-5">
-            <li>This app is for only ecomFrame,Kindly give Access Token enough scope permissions for orders </li>
-            <li> Enter a key from the ShopifyDashboard</li>
-            Disclaimer: It takes really some time to get a link, kindly wait for 2-3 minutes
+            <li>This app is for only ecomFrame. Kindly give Access Token enough scope permissions for orders.</li>
+            <li>Enter a key from the Shopify Dashboard.</li>
+            <li>Disclaimer: It takes really some time to get a link, kindly wait for few seconds</li>
           </ul>
         </div>
 
         <div>
-          <button className="bg-[--green] hover:bg-[#7eaa2b] text-white rounded px-6 py-2"
-          
-          onClick={() =>
+          <button
+            className="bg-[--green] hover:bg-[#7eaa2b] text-white rounded px-6 py-2"
+            onClick={() =>
               handleVerify(
-                (document.getElementById("shopifyToken") as HTMLInputElement)
-                  ?.value,
-                (document.getElementById("publicUrl") as HTMLInputElement)
-                  ?.value,
+                (document.getElementById("shopifyToken") as HTMLInputElement)?.value || "",
+                (document.getElementById("publicUrl") as HTMLInputElement)?.value || ""
               )
-          }
+            }
           >
             Submit
           </button>
