@@ -12,9 +12,6 @@ const app = new Frog({
   assetsPath: '/',
   basePath: '/api',
   verify:'silent',
-
-  // Supply a Hub to enable frame verification.
-  // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 })
 
 const usdcContractAddress = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; 
@@ -23,7 +20,7 @@ app.frame('/shop/:id', (c) => {
   const id = c.req.param('id');
     return c.res({
       action: `/next/${id}`,
-      image: '/ShopifyBased.jpeg',
+      image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
       imageAspectRatio:"1.91:1",
       headers:{
         'Content-Type': 'image/jpeg'
@@ -35,7 +32,7 @@ app.frame('/shop/:id', (c) => {
   })
 app.frame('/shop', (c) => {
     return c.res({
-     image: '/ShopifyBased.jpeg',
+     image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
       intents: [
         <Button.Link key='py' href='https://www.shopify.com/'>Check</Button.Link>,
       ]
@@ -46,11 +43,10 @@ app.frame('/next/:id', async(c) => {
   try{
    const id = c.req.param('id');
   const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id);
-  console.log('pk ',shopifyToken,publicUrl,walletAddress)
-  console.log('loser1',i);
+  console.log('first',i);
 const products =await fetchProductsShopify(shopifyToken,publicUrl)
 const firstProduct=products[i];
-console.log('loser2',firstProduct);
+console.log('loserfirstproduct ',firstProduct);
 i++;
 console.log('false i ,', i);
 
@@ -110,8 +106,8 @@ console.log('false i ,', i);
       intents: [
         // <TextInput placeholder="($USDC | ETH)" />,
         <Button key='pay' value='N'>Next</Button>,
-        <Button key='payment' action={`/V/${i}/${id}`} value='V'>Variants</Button>,
-        <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProduct.id}`} target={`/send-usdc/${firstProduct.price}/${walletAddress}`}>Buy</Button.Transaction>,
+        <Button key='variants' action={`/V/${i}/${id}`} value='V'>Variants</Button>,
+        <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProduct.title}/${firstProduct.price}`} target={`/send-usdc/${firstProduct.price}/${walletAddress}`}>Buy</Button.Transaction>,
 
       ]
     })
@@ -119,7 +115,7 @@ console.log('false i ,', i);
   catch(error){
     return c.res({
       action: `/shop`,
-      image: '/ShopifyBased.jpeg',
+      image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
       imageAspectRatio:"1.91:1",
       headers:{
         'Content-Type': 'image/jpeg'
@@ -134,11 +130,9 @@ console.log('false i ,', i);
 
 app.frame('/next2/:id',async(c) => {
 try{
-console.log('iteration',i);
 i=i+1;
 const id = c.req.param('id');
 const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id);
-console.log('batti',i);
 const products =await fetchProductsShopify(shopifyToken,publicUrl)
 const firstProduct=products[i]
 console.log('pew ', firstProduct)
@@ -200,7 +194,7 @@ if(i==products.length){
     },
     intents: [
       <Button key='payment' action={`/V/${i}/${id}`} value='V'>Variants</Button>,
-      <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProduct.id}`} target={`/send-usdc/${firstProduct.price}/${walletAddress}`}>Buy</Button.Transaction>,
+      <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProduct.title}/${firstProduct.price}`} target={`/send-usdc/${firstProduct.price}/${walletAddress}`}>Buy</Button.Transaction>,
     ]
   })
 
@@ -264,7 +258,7 @@ console.log('incrment',i)
       intents: [
         // <TextInput placeholder="($USDC | ETH)" />,
         <Button key='pay' value='P'>Next</Button>,
-        <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProduct.id}`} target={`/send-usdc/${firstProduct.price}/${walletAddress}`}>Buy</Button.Transaction>,
+        <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProduct.title}/${firstProduct.price}`} target={`/send-usdc/${firstProduct.price}/${walletAddress}`}>Buy</Button.Transaction>,
         <Button key='payment' action={`/V/${i}/${id}`} value='V'>Variants</Button>,
       ]
     })}
@@ -273,7 +267,7 @@ console.log('incrment',i)
   catch(error){
     return c.res({
       action: `/shop`,
-      image: '/ShopifyBased.jpeg',
+      image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
       imageAspectRatio:"1.91:1",
       headers:{
         'Content-Type': 'image/jpeg'
@@ -294,8 +288,7 @@ console.log('incrment',i)
    console.log('iteration',jj);
     const id = c.req.param('i');
     const id2=c.req.param('id');
-    console.log('sitej , ',jj);
-    console.log('iD , ',id)
+    console.log('id , ',id)
 
     const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id2);
     const products =await fetchProductsShopify(shopifyToken,publicUrl)
@@ -304,7 +297,7 @@ console.log('incrment',i)
     if(variantsLen==0 ){
       return c.res({
         action: `/next/${id2}`,
-        image: '/ShopifyBased.jpeg',
+        image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
         imageAspectRatio:"1.91:1",
         headers:{
           'Content-Type': 'image/jpeg'
@@ -319,7 +312,7 @@ console.log('incrment',i)
 if(firstProducts.image_src==null){
   return c.res({
     action: `/next/${id2}`,
-    image: '/ShopifyBased.jpeg',
+    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
@@ -333,12 +326,10 @@ if(firstProducts.image_src==null){
 
       console.log('firstproducts, ',firstProducts, jj)
       jj++;
-
-      console.log('gudda, ',firstProducts,jj)
 if(variantsLen==0){
   return c.res({
     action: `/next/${id2}`,
-    image: '/ShopifyBased.jpeg',
+    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
@@ -406,7 +397,7 @@ if(variantsLen==0){
           },
           intents: [
             <Button key='payment' action={`/next`} value='P'>Home</Button>,
-            <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProducts.id}`} target={`/send-usdc/${firstProducts.price}/${walletAddress}`}>Buy</Button.Transaction>,
+            <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProducts.title}/${firstProducts.price}`} target={`/send-usdc/${firstProducts.price}/${walletAddress}`}>Buy</Button.Transaction>,
           ]
         })
       
@@ -468,7 +459,7 @@ if(variantsLen==0){
       intents: [
         // <TextInput placeholder="($USDC | ETH)" />,
         <Button key='pay' value='P'>VariantsN</Button>,
-        <Button.Transaction key="transaction"  action={`/confirmit/${id}/${firstProducts.id}`}  target={`/send-usdc/${firstProducts.price}/${walletAddress}`}>Buy</Button.Transaction>,
+        <Button.Transaction key="transaction" action={`/confirmit/${id}/${firstProducts.title}/${firstProducts.price}`} target={`/send-usdc/${firstProducts.price}/${walletAddress}`}>Buy</Button.Transaction>,
       ]
     })
   }
@@ -476,7 +467,7 @@ if(variantsLen==0){
 catch(error){
   return c.res({
     action: `/shop`,
-    image: '/ShopifyBased.jpeg',
+    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
@@ -510,12 +501,13 @@ catch(error){
     })
 
 
-app.frame('/confirmit/:id/:vId',async (c) => {
+app.frame('/confirmit/:id/:title/:price',async (c) => {
   const id=c.req.param("id")
-  const vId=c.req.param("vId")
+  const title=c.req.param("title")
+  const price=c.req.param("price")
     const { transactionId} = c
     return c.res({
-      action:`/confirm/${id}/${vId}`,
+      action:`/confirm/${id}/${title}/${price}`,
       image:(
   <div
   style={{
@@ -547,11 +539,12 @@ app.frame('/confirmit/:id/:vId',async (c) => {
     })
   })
 
-app.frame('/confirm/:id/:vId',async (c) => {
+app.frame('/confirm/:id/:title/:price',async (c) => {
 
   try{
   const id=c.req.param("id")
-  const vId=c.req.param("vId")
+  const title=c.req.param("vId")
+  const price=c.req.param("price")
       const { inputText = '',previousButtonValues } = c
       const splitInput = inputText.split(':');
 
@@ -564,7 +557,6 @@ console.log(emailAddress,first_name,last_name,address,province,phone,city,state,
 
 const url = `${publicUrl}/admin/api/2024-04/orders.json`;
 // const url = 'https://quickstart-bc2bbab8.myshopify.com/admin/api/2024-04/orders.json';
-
 const data = {
   "order": {
     "email": emailAddress,
@@ -600,7 +592,8 @@ const data = {
     "financial_status": "paid",
     "line_items": [
       {
-      "product_id": vId,
+        "title": title,
+        "price": price,
         "quantity": quantity
       }
     ]
@@ -620,7 +613,7 @@ catch (error) {
   console.error('Error creating order:', error);
 }
   return c.res({
-    image: `/ShopifyBased.jpeg`,
+    image: `https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda`,
     headers:{
       'Content-Type': 'image/jpeg'
     },
@@ -632,7 +625,7 @@ catch (error) {
 catch(error){
   return c.res({
     action: `/shop`,
-    image: '/ShopifyBased.jpeg',
+    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
