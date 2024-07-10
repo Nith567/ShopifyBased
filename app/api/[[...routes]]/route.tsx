@@ -17,6 +17,7 @@ const app = new Frog({
 const usdcContractAddress = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; 
 
 app.frame('/shop/:id', (c) => {
+  i=0;
   const id = c.req.param('id');
     return c.res({
       action: `/next/${id}`,
