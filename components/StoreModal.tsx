@@ -3,26 +3,16 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-
+import dynamic from "next/dynamic";
 interface Props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   handleVerify: (shopifyToken: string, publicUrl: string) => void;
 }
 
+
 const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
   const [shopifyToken, setShopifyToken] = useState<string>("");
   const [publicUrl, setPublicUrl] = useState<string>("");
-
-  // Use useEffect for client-side operations
-  useEffect(() => {
-    const shopifyTokenInput = document.getElementById("shopifyToken") as HTMLInputElement;
-    const publicUrlInput = document.getElementById("publicUrl") as HTMLInputElement;
-
-    if (shopifyTokenInput && publicUrlInput) {
-      shopifyTokenInput.value = shopifyToken;
-      publicUrlInput.value = publicUrl;
-    }
-  }, [shopifyToken, publicUrl]); // Depend on state changes that affect DOM updates
 
   return (
     <div
@@ -96,4 +86,6 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
   );
 };
 
-export default StoreModal;
+
+// export default StoreModal;
+export default dynamic(() => Promise.resolve(StoreModal), { ssr: false });

@@ -11,43 +11,52 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 import { useRouter } from "next/navigation";
 import { britney } from "@/app/fonts";
 import { IndexChat } from '@indexnetwork/ui';
-
-export default function Hero() {
-
+import dynamic from 'next/dynamic';
+const Hero=() =>{
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-  const [copied, setCopied] = useState(false);
   const { connectors, connect, status, error } = useConnect();
+  const [copied, setCopied] = useState(false);
   const {address} = useAccount();
-	const connector = connectors[0];
+  const connector = connectors[0];
 
-  useEffect(() => {
-    function handleHitEscape(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        setShowModal(false);
-      }
-    }
+function Copy() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+    </svg>
+  );
+}
+function Tick() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <path d="m9 11 3 3L22 4" />
+    </svg>
+  );
+}
 
-    if (typeof document !== "undefined") {
-      document.addEventListener("keydown", handleHitEscape);
-    }
-
-    return () => {
-      if (typeof document !== "undefined") {
-        document.removeEventListener("keydown", handleHitEscape);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      if (showModal) {
-        document.documentElement.style.overflowY = "hidden";
-      } else {
-        document.documentElement.style.overflowY = "auto";
-      }
-    }
-  }, [showModal]);
 
   function handleCopyAddress() {
     if (!address) return;
@@ -145,7 +154,7 @@ export default function Hero() {
     </div>
 
     <div className="mt-8 text-blue-500">
-      Query your doubts here: 
+      Chat with our indexer
       <div className="mt-3">
       <IndexChat sources={["did:pkh:eip155:1:0x1b9Aceb609a62bae0c0a9682A9268138Faff4F5f"]} />
     </div>
@@ -157,40 +166,5 @@ export default function Hero() {
   
   );
 }
-
-function Copy() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-    </svg>
-  );
-}
-function Tick() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-      <path d="m9 11 3 3L22 4" />
-    </svg>
-  );
-}
+// export default Hero;
+export default dynamic(() => Promise.resolve(Hero), { ssr: false });
