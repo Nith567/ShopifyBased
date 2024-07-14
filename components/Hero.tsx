@@ -10,8 +10,9 @@ import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
 import { useRouter } from "next/navigation";
 import { britney } from "@/app/fonts";
-import { IndexChat } from '@indexnetwork/ui';
+
 import dynamic from 'next/dynamic';
+import Indexer from "./indexer";
 const Hero=() =>{
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
@@ -71,7 +72,6 @@ function Tick() {
       });
   }
 
-
   const handleVerify = async (shopifyToken: string, publicUrl: string) => {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/ship`, {
@@ -130,7 +130,6 @@ function Tick() {
       >
         Get Started
       </button>
-
       {address ? (
         <div className="text-center text-xl">
           <button
@@ -139,7 +138,7 @@ function Tick() {
           >
             <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
             <span className="text-[10px]">
-              {copied ? <Tick /> : <Copy />}
+              {/* {copied ? <Tick /> : <Copy />} */}
             </span>
           </button>
         </div>
@@ -155,9 +154,7 @@ function Tick() {
 
     <div className="mt-8 text-blue-500">
       Chat with our indexer
-      <div className="mt-3">
-      <IndexChat sources={["did:pkh:eip155:1:0x1b9Aceb609a62bae0c0a9682A9268138Faff4F5f"]} />
-    </div>
+    <Indexer/>
     </div>
   </div>
 </div>

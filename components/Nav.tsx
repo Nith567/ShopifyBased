@@ -20,7 +20,7 @@ function Nav() {
         >
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Company</span>
               <img
                 className="h-12 w-auto border-2 rounded-lg z-0"
                 src="/Logo1.png"

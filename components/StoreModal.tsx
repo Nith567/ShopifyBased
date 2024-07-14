@@ -4,6 +4,7 @@ import Image from "next/image";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+
 interface Props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   handleVerify: (shopifyToken: string, publicUrl: string) => void;
@@ -15,7 +16,9 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
   const [publicUrl, setPublicUrl] = useState<string>("");
 
   return (
-    <div
+    <>
+   
+  <div
       onClick={() => setShowModal(false)}
       className="bg-black/60 fixed top-0 left-0 z-[3000] w-screen h-screen flex justify-center items-center"
     >
@@ -83,6 +86,7 @@ const StoreModal: React.FC<Props> = ({ handleVerify, setShowModal }) => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 
