@@ -138,7 +138,7 @@ function Tick() {
           >
             <span>{`${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`}</span>
             <span className="text-[10px]">
-              {/* {copied ? <Tick /> : <Copy />} */}
+              {copied ? <Tick /> : <Copy />}
             </span>
           </button>
         </div>
