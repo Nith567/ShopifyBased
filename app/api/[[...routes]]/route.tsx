@@ -7,6 +7,7 @@ import { handle } from 'frog/next'
 import { serveStatic } from 'frog/serve-static'
 import { fetchKeyDetails, fetchProductsShopify } from '../../../utils/route';
 import { erc20Abi, parseUnits } from 'viem';
+import { simulateTransaction } from '@/utils/simulatetransaction'
 
 const app = new Frog({
   assetsPath: '/',
@@ -44,12 +45,9 @@ app.frame('/next/:id', async(c) => {
   try{
    const id = c.req.param('id');
   const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id);
-  console.log('first',i);
 const products =await fetchProductsShopify(shopifyToken,publicUrl)
 const firstProduct=products[i];
-console.log('loserfirstproduct ',firstProduct);
 i++;
-console.log('false i ,', i);
 
     return c.res({
       action: `/next2/${id}`,
@@ -136,7 +134,6 @@ const id = c.req.param('id');
 const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id);
 const products =await fetchProductsShopify(shopifyToken,publicUrl)
 const firstProduct=products[i]
-console.log('pew ', firstProduct)
 
 if(i==products.length){
   return c.res({
@@ -202,7 +199,6 @@ if(i==products.length){
 }
 
 else{
-console.log('incrment',i)
     return c.res({
       image:(
         <div
@@ -286,10 +282,8 @@ console.log('incrment',i)
 
   app.frame('/V/:i/:id', async(c) => {
     try{
-   console.log('iteration',jj);
     const id = c.req.param('i');
     const id2=c.req.param('id');
-    console.log('id , ',id)
 
     const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id2);
     const products =await fetchProductsShopify(shopifyToken,publicUrl)
@@ -325,7 +319,6 @@ if(firstProducts.image_src==null){
   })
 }
 
-      console.log('firstproducts, ',firstProducts, jj)
       jj++;
 if(variantsLen==0){
   return c.res({
@@ -480,26 +473,54 @@ catch(error){
 }
   })
 
-  // app.transaction('/send-usdc/:price/:owner', async(c) => {
-  app.transaction('/send-usdc/:price/:walletAddress', async(c) => {
-    // let owner = c.req.param('owner');
-    // const owner='0x4b6ecf31ed88a74dcf391fbb4b23dcb8e5a78b99'
-    const price  = c.req.param('price');
-    const owner  = c.req.param('walletAddress');
-      return c.contract({
-        // @ts-ignore
-        abi:erc20Abi,
-        chainId: 'eip155:8453',
-        //@ts-ignore
-        functionName: 'transfer',
-        args: [
+
+  app.use("/send-usdc/*",async (c, next) => {
+    const path = c.req.path;
+    const [ , , , price, walletAddress] = path.split('/');
+    if(walletAddress=='flag'){
+      await next();
+    }
+ else{
+    let response = await simulateTransaction(walletAddress)
+
+    if(response =='allow'){
+      await next();
+    }
+    else{
+       return c.redirect('flag')
+    }
+    }
+        }); 
+
+  app.frame('/send-usdc/:price/flag', (c) => {
+          return c.res({
+           image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+            intents: [
+              <Button.Link key='py' href='https://app.shield3.com/'>You are Not ALLOWED</Button.Link>,
+            ]
+          })
+        })
+
+    app.transaction('/send-usdc/:price/:walletAddress', async (c) => {
+
+      const price = c.req.param('price');
+      const walletAddress = c.req.param('walletAddress');
+    
+        return c.contract({
+          // @ts-ignore
+          abi: erc20Abi,
+          chainId: 'eip155:8453',
           //@ts-ignore
-          owner,
-          parseUnits(price, 6)
-        ],
-        to: usdcContractAddress,
-      })
-    })
+          functionName: 'transfer',
+          args: [
+            //@ts-ignore
+            walletAddress,
+            parseUnits(price, 6)
+          ],
+          to: usdcContractAddress,
+        });
+
+    });
 
 
 app.frame('/confirmit/:id/:title/:price',async (c) => {
@@ -552,7 +573,6 @@ app.frame('/confirm/:id/:title/:price',async (c) => {
       const splitInput = inputText.split(':');
 
       const { shopifyToken, publicUrl,walletAddress } = await fetchKeyDetails(id);
-      console.log(splitInput)
      const [
       emailAddress,first_name,last_name,address,province,phone,city,state,country,zip
     ] = splitInput;
