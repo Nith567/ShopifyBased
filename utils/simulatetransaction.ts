@@ -17,7 +17,7 @@ interface SimulateResponse {
 }
 
 export async function simulateTransaction(address: string): Promise<string | undefined> {;
-  const url = `https://rpc.shield3.com/v3/base-mainnet/${process.env.NEXT_PUBLIC_SHIELD_API}/rpc`;
+  const url = `https://rpc.shield3.com/v3/0x2105/${process.env.NEXT_PUBLIC_SHIELD_API}/rpc`;
   const data = {
     jsonrpc: '2.0',
     method: 'eth_simulateTransaction',
