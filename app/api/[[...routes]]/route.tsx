@@ -636,7 +636,7 @@ catch (error) {
   console.error('Error creating order:', error);
 }
   return c.res({
-    image: `https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda`,
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
     headers:{
       'Content-Type': 'image/jpeg'
     },
