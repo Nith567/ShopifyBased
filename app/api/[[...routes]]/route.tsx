@@ -22,7 +22,7 @@ app.frame('/shop/:id', (c) => {
   const id = c.req.param('id');
     return c.res({
       action: `/next/${id}`,
-      image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+      image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
       imageAspectRatio:"1.91:1",
       headers:{
         'Content-Type': 'image/jpeg'
@@ -34,7 +34,7 @@ app.frame('/shop/:id', (c) => {
   })
 app.frame('/shop', (c) => {
     return c.res({
-     image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+     image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
       intents: [
         <Button.Link key='py' href='https://www.shopify.com/'>Check</Button.Link>,
       ]
@@ -114,7 +114,7 @@ i++;
   catch(error){
     return c.res({
       action: `/shop`,
-      image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+      image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
       imageAspectRatio:"1.91:1",
       headers:{
         'Content-Type': 'image/jpeg'
@@ -264,7 +264,7 @@ else{
   catch(error){
     return c.res({
       action: `/shop`,
-      image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+      image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
       imageAspectRatio:"1.91:1",
       headers:{
         'Content-Type': 'image/jpeg'
@@ -292,7 +292,7 @@ else{
     if(variantsLen==0 ){
       return c.res({
         action: `/next/${id2}`,
-        image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+        image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
         imageAspectRatio:"1.91:1",
         headers:{
           'Content-Type': 'image/jpeg'
@@ -307,7 +307,7 @@ else{
 if(firstProducts.image_src==null){
   return c.res({
     action: `/next/${id2}`,
-    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
@@ -323,7 +323,7 @@ if(firstProducts.image_src==null){
 if(variantsLen==0){
   return c.res({
     action: `/next/${id2}`,
-    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
@@ -461,7 +461,7 @@ if(variantsLen==0){
 catch(error){
   return c.res({
     action: `/shop`,
-    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
@@ -494,7 +494,7 @@ catch(error){
 
   app.frame('/send-usdc/:price/flag', (c) => {
           return c.res({
-           image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+           image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
             intents: [
               <Button.Link key='py' href='https://app.shield3.com/'>You are Not ALLOWED</Button.Link>,
             ]
@@ -648,7 +648,7 @@ catch (error) {
 catch(error){
   return c.res({
     action: `/shop`,
-    image: 'https://gateway.lighthouse.storage/ipfs/bafkreif2dos6eldl2aitdl36ilcqodikt22cio4trgfj7rd2qpopoyzmda',
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
     imageAspectRatio:"1.91:1",
     headers:{
       'Content-Type': 'image/jpeg'
