@@ -556,7 +556,8 @@ app.frame('/confirmit/:id/:title/:price',async (c) => {
   ,
       intents: [
         <TextInput placeholder="(1/3 NYC-US)" />,
-        <Button key='pay' value='C'>Confirm Details</Button>
+        <Button key='pay' value='C'>Confirm Details</Button>,
+        <Button.Link href={`https://base.blockscout.com/tx/${transactionId}`} key='Tnx' >View Explorer</Button.Link>
       ],
     })
   })
