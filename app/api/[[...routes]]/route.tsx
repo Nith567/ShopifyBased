@@ -474,23 +474,6 @@ catch(error){
   })
 
 
-  app.use("/send-usdc/*",async (c, next) => {
-    const path = c.req.path;
-    const [ , , , price, walletAddress] = path.split('/');
-    if(walletAddress=='flag'){
-      await next();
-    }
- else{
-    let response = await simulateTransaction(walletAddress)
-
-    if(response =='allow'){
-      await next();
-    }
-    else{
-       return c.redirect('flag')
-    }
-    }
-        }); 
 
   app.frame('/send-usdc/:price/flag', (c) => {
           return c.res({
