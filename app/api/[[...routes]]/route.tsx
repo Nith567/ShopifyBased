@@ -490,7 +490,7 @@ catch(error){
         return c.contract({
           // @ts-ignore
           abi: erc20Abi,
-          chainId: "eip155:84532",
+          chainId: "eip155:8453",
           //@ts-ignore
           functionName: 'transfer',
           args: [
