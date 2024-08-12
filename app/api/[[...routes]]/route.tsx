@@ -473,8 +473,6 @@ catch(error){
 }
   })
 
-
-
   app.frame('/send-usdc/:price/flag', (c) => {
           return c.res({
            image: `${process.env.NEXT_PUBLIC_SITE_URL}/shopifyBased.jpeg`,
@@ -492,7 +490,7 @@ catch(error){
         return c.contract({
           // @ts-ignore
           abi: erc20Abi,
-          chainId: 'eip155:8453',
+          chainId: "eip155:84532",
           //@ts-ignore
           functionName: 'transfer',
           args: [
